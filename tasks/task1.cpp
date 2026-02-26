@@ -3,5 +3,6 @@
 
 void task1() {
     // TODO 1: Please initialize and show your first window!
-
+polyscope::init();
+polyscope::show();
 }

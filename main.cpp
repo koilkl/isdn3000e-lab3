@@ -5,9 +5,10 @@
 
 int main() {
     // TODO: Don't forget to invoke the task function you are using
-    task1();
-    // task2();
-    // task3();
-    // task4();
+    //task1();
+    //task2();
+    //task2_with_libigl();
+     //task3();
+     task4();
     return 0;
 }

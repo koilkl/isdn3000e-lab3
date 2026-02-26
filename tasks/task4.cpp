@@ -58,7 +58,14 @@ void task4() {
     // TODO 1: Set the initial appearance of the mesh.
     //  - You must explicitly call: setSurfaceColor(), setPosition() or translate() to define the starting color and location of the object.
     //  - You can set the input color or position value by {0.1, 0.1, 0.1}
+    //  - You can also set the initial transparency and point radius values using setTransparency() and setPointRadius().
 
+     bunny->setSurfaceColor({0.1, 0.1, 0.1});
+     bunnyPts->setPointColor({0.1, 0.1, 0.1});
+     bunny->setPosition({0.1, 0.1, 0.1});
+     bunnyPts->setPosition({0.1, 0.1, 0.1});
+     bunny->setTransparency(0.5f);
+     bunnyPts->setPointRadius(0.001f);
 
     // ============================================================
     // 3) UI callback (runs every frame)
@@ -68,18 +75,31 @@ void task4() {
         // TODO 2: Add a title text to the UI window using ImGui::Text(). The title should describe what this control panel is for.
 
         ImGui::Separator();
-
+        ImGui::Text("Mesh Appearance Control Panel");
         bool changed = false;
         if (ImGui::Checkbox("Show Mesh", &showMesh))
             changed = true;
-
+        if (ImGui::Checkbox("Show Points", &showPoints))
+            changed = true;
+        if (ImGui::SliderFloat("Mesh Transparency", &alpha, 0.0f, 1.0f))
+            changed = true;
+        if (ImGui::SliderFloat("Point Radius", &pointRadius, 0.0001f, 0.01f))
+            changed = true;
+        if (ImGui::Button("Reset")) {
+            changed = true;
+        }
         // TODO 3: Add at least:
         //      - ONE Checkbox (e.g. checkbox to show point cloud of the mesh)
         //      - ONE Slider (e.g. sliders to change transparency or point radius values)
         //      - ONE Button (e.g. reset button to set all properties back to initial values)
         //  - You may control ANY property of the mesh (e.g., position, color, rotation, size, transparency, etc.)
-
-
+        if (changed) {
+            bunny->setEnabled(showMesh);
+            bunnyPts->setEnabled(showPoints);
+            bunny->setTransparency(alpha);
+            bunnyPts->setPointRadius(pointRadius);
+        }
+        
 
         // TODO 4: Use the 'changed' variable to update the object properties.
         //  - When the UI value changes, apply the new settings so that the object updates dynamically every frame.
